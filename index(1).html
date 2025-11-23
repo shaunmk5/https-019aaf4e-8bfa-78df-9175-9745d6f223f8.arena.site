@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyHaus Luxor - Premier property marketing and lead generation for brokers across South Africa. Expert campaigns that convert listings into sales.">
+    <meta name="keywords" content="property marketing, real estate Johannesburg, lead generation, property brokers South Africa, luxury homes, property listings">
+    <meta name="author" content="Shaun Michael Kukard">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="SkyHaus Luxor - You're ready for the next destination">
+    <meta property="og:description" content="Expert marketing campaigns and lead generation for property brokers across Johannesburg, South Africa">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SkyHaus Luxor - Premium Property Marketing">
+    <meta name="twitter:description" content="Expert marketing campaigns and lead generation for property brokers">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    
+    <title>SkyHaus Luxor - You're ready for the next destination</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+        }
+        
+        .listing-card {
+            transition: all 0.3s ease;
+        }
+        
+        .listing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 600px;
+        }
+        
+        .admin-panel {
+            background: #f8fafc;
+        }
+        
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-share-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .social-share-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .video-upload-area {
+            border: 2px dashed #cbd5e1;
+            transition: all 0.3s ease;
+        }
+        
+        .video-upload-area:hover {
+            border-color: #3b82f6;
+            background: #f8fafc;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            background: #10b981;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .property-image-preview {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Notification Toast -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-home text-blue-600 text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">SkyHaus Luxor</h1>
+                        <p class="text-xs text-gray-600">You're ready for the next destination</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 font-medium">Home</a>
+                    <a href="#listings" class="nav-link text-gray-700 font-medium">Listings</a>
+                    <a href="#about" class="nav-link text-gray-700 font-medium">About</a>
+                    <a href="#contact" class="nav-link text-gray-700 font-medium">Contact</a>
+                    <button onclick="toggleAdminPanel()" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">
+                        <i class="fas fa-user-shield mr-2"></i>Admin Hub
+                    </button>
+                </div>
+                
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block text-gray-700 font-medium">Home</a>
+                <a href="#listings" class="block text-gray-700 font-medium">Listings</a>
+                <a href="#about" class="block text-gray-700 font-medium">About</a>
+                <a href="#contact" class="block text-gray-700 font-medium">Contact</a>
+                <button onclick="toggleAdminPanel()" class="w-full btn-primary text-white px-6 py-2 rounded-lg font-medium">
+                    <i class="fas fa-user-shield mr-2"></i>Admin Hub
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section pt-32 pb-20 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    Find Your Dream Property in South Africa
+                </h2>
+                <p class="text-xl md:text-2xl mb-8 text-gray-300">
+                    You're ready for the next destination
+                </p>
+                <p class="text-lg mb-12 text-gray-400">
+                    Expert marketing campaigns and lead generation for property brokers across Johannesburg
+                </p>
+                
+                <!-- Lead Capture Form -->
+                <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Get Exclusive Property Listings</h3>
+                    <form id="leadForm" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="text" id="leadName" placeholder="Your Name" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input type="email" id="leadEmail" placeholder="Email Address" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="tel" id="leadPhone" placeholder="Phone Number"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <select id="leadInterest" 
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Property Type</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="villa">Villa</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full btn-primary text-white px-8 py-4 rounded-lg font-semibold text-lg">
+                            Get Started <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="stats-card p-6 rounded-xl shadow-lg">
+                    <i class="fas fa-building text-4xl text-blue-600 mb-3"></i>
+                    <h3 class="text-3xl font-bold text-gray-900" id="totalListings">0</h3>
+                    <p class="text-gray-600 font-medium">Active Listings</p>
+                </div>
+                <div class="stats-card p-6 rounded-xl shadow-lg">
+                    <i class="fas fa-users text-4xl text-blue-600 mb-3"></i>
+                    <h3 class="text-3xl font-bold text-gray-900" id="totalLeads">0</h3>
+                    <p class="text-gray-600 font-medium">Leads Generated</p>
+                </div>
+                <div class="stats-card p-6 rounded-xl shadow-lg">
+                    <i class="fas fa-handshake text-4xl text-blue-600 mb-3"></i>
+                    <h3 class="text-3xl font-bold text-gray-900">150+</h3>
+                    <p class="text-gray-600 font-medium">Broker Partners</p>
+                </div>
+                <div class="stats-card p-6 rounded-xl shadow-lg">
+                    <i class="fas fa-chart-line text-4xl text-blue-600 mb-3"></i>
+                    <h3 class="text-3xl font-bold text-gray-900">95%</h3>
+                    <p class="text-gray-600 font-medium">Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listings Section -->
+    <section id="listings" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Listings</h2>
+                <p class="text-xl text-gray-600">Discover premium properties across Johannesburg</p>
+            </div>
+            
+            <div id="listingsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Listings will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">About SkyHaus Luxor</h2>
+                    <p class="text-lg text-gray-700 mb-6">
+                        We specialize in creating powerful marketing campaigns and generating high-quality leads for property brokers across South Africa. Our innovative approach transforms property listings into compelling lead magnets that drive results.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-6">
+                        By outsourcing your marketing to SkyHaus Luxor, you gain access to cutting-edge advertising strategies, professional content creation, and a dedicated team committed to maximizing your sales potential.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Lead Generation Excellence</h4>
+                                <p class="text-gray-600">Advanced marketing funnels that convert</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Social Media Marketing</h4>
+                                <p class="text-gray-600">Multi-platform campaigns for maximum reach</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Professional Content Creation</h4>
+                                <p class="text-gray-600">High-quality visuals and video production</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-12 text-white">
+                    <i class="fas fa-trophy text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold mb-4">Why Choose Us?</h3>
+                    <ul class="space-y-3 text-lg">
+                        <li><i class="fas fa-star mr-2"></i> Commission-based partnership model</li>
+                        <li><i class="fas fa-star mr-2"></i> No upfront costs for brokers</li>
+                        <li><i class="fas fa-star mr-2"></i> Proven track record of success</li>
+                        <li><i class="fas fa-star mr-2"></i> Dedicated support team</li>
+                        <li><i class="fas fa-star mr-2"></i> Advanced analytics and reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Ready to transform your property listings into high-converting campaigns? Let's talk.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-map-marker-alt text-3xl text-blue-400"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Location</h4>
+                                <p class="text-gray-300">Johannesburg, South Africa</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-phone text-3xl text-blue-400"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Phone</h4>
+                                <p class="text-gray-300">+27 69 640 0789</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-envelope text-3xl text-blue-400"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Email</h4>
+                                <p class="text-gray-300">shaunmichael@galaxyhit.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-user text-3xl text-blue-400"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Contact Person</h4>
+                                <p class="text-gray-300">Shaun Michael Kukard</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+                    <form id="contactForm" class="space-y-4">
+                        <input type="text" placeholder="Your Name" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500">
+                        <input type="email" placeholder="Email Address" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500">
+                        <input type="tel" placeholder="Phone Number"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500">
+                        <textarea placeholder="Your Message" rows="4" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500"></textarea>
+                        <button type="submit" class="w-full btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">SkyHaus Luxor</h3>
+                    <p class="text-gray-400">You're ready for the next destination</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-blue-400">Home</a></li>
+                        <li><a href="#listings" class="hover:text-blue-400">Listings</a></li>
+                        <li><a href="#about" class="hover:text-blue-400">About</a></li>
+                        <li><a href="#contact" class="hover:text-blue-400">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Lead Generation</li>
+                        <li>Marketing Campaigns</li>
+                        <li>Content Creation</li>
+                        <li>Social Media Marketing</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 SkyHaus Luxor. All rights reserved. | Johannesburg, South Africa</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminPanel" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-7xl max-h-[90vh] overflow-y-auto m-4">
+            <div class="sticky top-0 bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-t-2xl flex justify-between items-center">
+                <div>
+                    <h2 class="text-3xl font-bold">Admin Control Hub</h2>
+                    <p class="text-blue-100">Manage listings, campaigns, and leads</p>
+                </div>
+                <button onclick="toggleAdminPanel()" class="text-white hover:bg-white hover:text-blue-600 rounded-full p-2 w-10 h-10">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-8">
+                <!-- Admin Tabs -->
+                <div class="flex space-x-4 mb-8 border-b pb-4">
+                    <button onclick="switchAdminTab('listings')" id="tabListings" class="px-6 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">
+                        <i class="fas fa-building mr-2"></i>Manage Listings
+                    </button>
+                    <button onclick="switchAdminTab('leads')" id="tabLeads" class="px-6 py-3 font-semibold text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-users mr-2"></i>View Leads
+                    </button>
+                    <button onclick="switchAdminTab('content')" id="tabContent" class="px-6 py-3 font-semibold text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-edit mr-2"></i>Content Creator
+                    </button>
+                    <button onclick="switchAdminTab('social')" id="tabSocial" class="px-6 py-3 font-semibold text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-share-alt mr-2"></i>Social Media
+                    </button>
+                </div>
+
+                <!-- Listings Management Tab -->
+                <div id="adminListings" class="admin-tab">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-6">Add New Listing</h3>
+                            <form id="addListingForm" class="space-y-4">
+                                <input type="text" id="listingTitle" placeholder="Property Title" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="listingPrice" placeholder="Price (e.g., R 2,500,000)" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="listingLocation" placeholder="Location" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="listingBedrooms" placeholder="Bedrooms" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="listingBathrooms" placeholder="Bathrooms" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="listingArea" placeholder="Area (sqm)" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <textarea id="listingDescription" placeholder="Property Description" rows="3" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500"></textarea>
+                                <input type="text" id="listingBroker" placeholder="Broker Name" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="email" id="listingBrokerEmail" placeholder="Broker Email" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                
+                                <div class="video-upload-area rounded-lg p-6 text-center">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                                    <p class="text-gray-600 mb-2">Upload Property Image</p>
+                                    <input type="file" id="listingImage" accept="image/*" class="w-full">
+                                    <div id="imagePreview" class="mt-4"></div>
+                                </div>
+                                
+                                <button type="submit" class="w-full btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-plus mr-2"></i>Add Listing
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6">Current Listings</h3>
+                            <div id="adminListingsList" class="space-y-4 max-h-[600px] overflow-y-auto">
+                                <!-- Admin listings will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leads Management Tab -->
+                <div id="adminLeads" class="admin-tab hidden">
+                    <h3 class="text-2xl font-bold mb-6">Generated Leads</h3>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <table class="w-full">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-6 py-4 text-left font-semibold">Name</th>
+                                    <th class="px-6 py-4 text-left font-semibold">Email</th>
+                                    <th class="px-6 py-4 text-left font-semibold">Phone</th>
+                                    <th class="px-6 py-4 text-left font-semibold">Interest</th>
+                                    <th class="px-6 py-4 text-left font-semibold">Date</th>
+                                    <th class="px-6 py-4 text-left font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leadsTableBody">
+                                <!-- Leads will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-6 flex justify-end space-x-4">
+                        <button onclick="exportLeads('csv')" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700">
+                            <i class="fas fa-file-csv mr-2"></i>Export to CSV
+                        </button>
+                        <button onclick="exportLeads('pdf')" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700">
+                            <i class="fas fa-file-pdf mr-2"></i>Export to PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Creator Tab -->
+                <div id="adminContent" class="admin-tab hidden">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6">Video Content Generator</h3>
+                            <div class="bg-gray-50 p-6 rounded-xl space-y-4">
+                                <div class="video-upload-area rounded-lg p-8 text-center cursor-pointer">
+                                    <i class="fas fa-video text-5xl text-gray-400 mb-4"></i>
+                                    <p class="text-gray-600 font-semibold mb-2">Upload Property Video</p>
+                                    <p class="text-sm text-gray-500 mb-4">MP4, MOV, AVI up to 100MB</p>
+                                    <input type="file" id="videoUpload" accept="video/*" class="hidden">
+                                    <button onclick="document.getElementById('videoUpload').click()" 
+                                        class="btn-primary text-white px-6 py-2 rounded-lg">
+                                        Choose Video
+                                    </button>
+                                </div>
+                                
+                                <div id="videoPreview" class="hidden">
+                                    <video id="uploadedVideo" controls class="w-full rounded-lg"></video>
+                                    <button onclick="processVideo()" class="w-full mt-4 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">
+                                        <i class="fas fa-magic mr-2"></i>Process Video
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <label class="block text-sm font-semibold mb-2">Or Embed YouTube URL</label>
+                                    <input type="url" id="youtubeUrl" placeholder="https://youtube.com/watch?v=..."
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                    <button onclick="embedYouTube()" class="w-full mt-2 btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                                        <i class="fab fa-youtube mr-2"></i>Embed Video
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6">Image Gallery Manager</h3>
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <div class="video-upload-area rounded-lg p-6 text-center cursor-pointer mb-4">
+                                    <i class="fas fa-images text-4xl text-gray-400 mb-2"></i>
+                                    <p class="text-gray-600 mb-2">Upload Property Images</p>
+                                    <input type="file" id="galleryUpload" accept="image/*" multiple class="hidden">
+                                    <button onclick="document.getElementById('galleryUpload').click()" 
+                                        class="btn-primary text-white px-6 py-2 rounded-lg">
+                                        Choose Images
+                                    </button>
+                                </div>
+                                
+                                <div id="galleryPreview" class="grid grid-cols-3 gap-2">
+                                    <!-- Gallery images will appear here -->
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <h4 class="font-bold mb-3">Marketing Copy Generator</h4>
+                                    <textarea id="marketingCopy" rows="5" placeholder="Enter property details and click generate..."
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500"></textarea>
+                                    <button onclick="generateMarketingCopy()" class="w-full mt-2 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
+                                        <i class="fas fa-robot mr-2"></i>Generate AI Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Tab -->
+                <div id="adminSocial" class="admin-tab hidden">
+                    <h3 class="text-2xl font-bold mb-6">Social Media Campaign Manager</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold mb-4">Share Listings</h4>
+                            <div id="socialListings" class="space-y-4 max-h-96 overflow-y-auto">
+                                <!-- Listings for sharing will appear here -->
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold mb-4">Campaign Analytics</h4>
+                            <div class="space-y-4">
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold">Facebook Reach</span>
+                                        <span class="text-2xl font-bold text-blue-600">12.5K</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold">Instagram Engagement</span>
+                                        <span class="text-2xl font-bold text-pink-600">8.2K</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-pink-600 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold">LinkedIn Impressions</span>
+                                        <span class="text-2xl font-bold text-blue-800">5.1K</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-800 h-2 rounded-full" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold">Twitter Clicks</span>
+                                        <span class="text-2xl font-bold text-blue-400">3.8K</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-400 h-2 rounded-full" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <button onclick="downloadAnalytics()" class="w-full bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800">
+                                    <i class="fas fa-download mr-2"></i>Download Full Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-gradient-to-r from-purple-600 to-pink-600 p-6 rounded-xl text-white">
+                        <h4 class="text-xl font-bold mb-4">Schedule Campaign</h4>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <input type="date" id="campaignDate" 
+                                class="px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+                            <input type="time" id="campaignTime" 
+                                class="px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+                            <button onclick="scheduleCampaign()" class="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
+                                <i class="fas fa-calendar-plus mr-2"></i>Schedule
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listing Detail Modal -->
+    <div id="listingModal" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full m-4 max-h-[90vh] overflow-y-auto">
+            <div id="listingModalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage with LocalStorage Persistence
+        let listings = [];
+        let leads = [];
+        let currentAdminTab = 'listings';
+
+        // Load data from LocalStorage
+        function loadFromStorage() {
+            const savedListings = localStorage.getItem('skyhausListings');
+            const savedLeads = localStorage.getItem('skyhausLeads');
+            
+            if (savedListings) {
+                listings = JSON.parse(savedListings);
+            } else {
+                initSampleListings();
+            }
+            
+            if (savedLeads) {
+                leads = JSON.parse(savedLeads);
+            }
+        }
+
+        // Save data to LocalStorage
+        function saveToStorage() {
+            localStorage.setItem('skyhausListings', JSON.stringify(listings));
+            localStorage.setItem('skyhausLeads', JSON.stringify(leads));
+        }
+
+        // Initialize with sample listings
+        function initSampleListings() {
+            const sampleListings = [
+                {
+                    id: Date.now() + 1,
+                    title: "Luxury Penthouse in Sandton",
+                    price: "R 5,800,000",
+                    location: "Sandton, Johannesburg",
+                    bedrooms: "4",
+                    bathrooms: "3",
+                    area: "280",
+                    description: "Stunning penthouse with panoramic city views, modern finishes, and premium amenities.",
+                    broker: "John Smith",
+                    brokerEmail: "john@example.com",
+                    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop"
+                },
+                {
+                    id: Date.now() + 2,
+                    title: "Modern Family Home in Rosebank",
+                    price: "R 3,200,000",
+                    location: "Rosebank, Johannesburg",
+                    bedrooms: "3",
+                    bathrooms: "2",
+                    area: "220",
+                    description: "Beautiful family home with spacious garden, perfect for entertaining.",
+                    broker: "Sarah Johnson",
+                    brokerEmail: "sarah@example.com",
+                    image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop"
+                },
+                {
+                    id: Date.now() + 3,
+                    title: "Contemporary Villa in Hyde Park",
+                    price: "R 7,500,000",
+                    location: "Hyde Park, Johannesburg",
+                    bedrooms: "5",
+                    bathrooms: "4",
+                    area: "450",
+                    description: "Exquisite villa with pool, cinema room, and wine cellar.",
+                    broker: "Michael Brown",
+                    brokerEmail: "michael@example.com",
+                    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop"
+                }
+            ];
+            
+            listings = sampleListings;
+            renderListings();
+            updateStats();
+        }
+
+        // Render Listings
+        function renderListings() {
+            const grid = document.getElementById('listingsGrid');
+            grid.innerHTML = listings.map(listing => `
+                <div class="listing-card bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer" onclick="openListingDetail(${listing.id})">
+                    <div class="relative">
+                        <img src="${listing.image}" alt="${listing.title}" class="property-image-preview">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">
+                            ${listing.price}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">${listing.title}</h3>
+                        <p class="text-gray-600 mb-4">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>${listing.location}
+                        </p>
+                        <div class="flex justify-between items-center mb-4 text-gray-700">
+                            <span><i class="fas fa-bed mr-1"></i>${listing.bedrooms} Beds</span>
+                            <span><i class="fas fa-bath mr-1"></i>${listing.bathrooms} Baths</span>
+                            <span><i class="fas fa-ruler-combined mr-1"></i>${listing.area} sqm</span>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">${listing.description}</p>
+                        <div class="flex justify-between items-center">
+                            <button onclick="event.stopPropagation(); shareOnSocial(${listing.id})" 
+                                class="text-blue-600 hover:text-blue-800 font-semibold">
+                                <i class="fas fa-share-alt mr-2"></i>Share
+                            </button>
+                            <button class="btn-primary text-white px-6 py-2 rounded-lg">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            renderAdminListings();
+            renderSocialListings();
+        }
+
+        // Open Listing Detail
+        function openListingDetail(id) {
+            const listing = listings.find(l => l.id === id);
+            if (!listing) return;
+            
+            const modal = document.getElementById('listingModal');
+            const content = document.getElementById('listingModalContent');
+            
+            content.innerHTML = `
+                <div class="relative">
+                    <img src="${listing.image}" alt="${listing.title}" class="w-full h-96 object-cover">
+                    <button onclick="closeListingModal()" 
+                        class="absolute top-4 right-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100">
+                        <i class="fas fa-times text-2xl text-gray-700"></i>
+                    </button>
+                    <div class="absolute bottom-4 left-4 bg-blue-600 text-white px-6 py-3 rounded-lg">
+                        <span class="text-3xl font-bold">${listing.price}</span>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">${listing.title}</h2>
+                    <p class="text-xl text-gray-600 mb-6">
+                        <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>${listing.location}
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-bed text-3xl text-blue-600 mb-2"></i>
+                            <p class="text-2xl font-bold">${listing.bedrooms}</p>
+                            <p class="text-gray-600">Bedrooms</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-bath text-3xl text-blue-600 mb-2"></i>
+                            <p class="text-2xl font-bold">${listing.bathrooms}</p>
+                            <p class="text-gray-600">Bathrooms</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-ruler-combined text-3xl text-blue-600 mb-2"></i>
+                            <p class="text-2xl font-bold">${listing.area}</p>
+                            <p class="text-gray-600">sqm</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-4">Description</h3>
+                        <p class="text-gray-700 text-lg">${listing.description}</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                        <h4 class="font-bold text-lg mb-2">Property Broker</h4>
+                        <p class="text-gray-700">${listing.broker}</p>
+                        <p class="text-gray-600">${listing.brokerEmail}</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">Interested in this property?</h3>
+                        <form onsubmit="submitPropertyInquiry(event, ${listing.id})" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Your Name" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                <input type="email" placeholder="Email Address" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <input type="tel" placeholder="Phone Number" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                            <textarea placeholder="Your Message" rows="3"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500"></textarea>
+                            <button type="submit" class="w-full btn-primary text-white px-8 py-4 rounded-lg font-semibold text-lg">
+                                Send Inquiry <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="mt-6 flex justify-center space-x-4">
+                        <button onclick="shareOnSocial(${listing.id}, 'facebook')" 
+                            class="social-share-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold">
+                            <i class="fab fa-facebook mr-2"></i>Share on Facebook
+                        </button>
+                        <button onclick="shareOnSocial(${listing.id}, 'twitter')" 
+                            class="social-share-btn bg-blue-400 text-white px-6 py-3 rounded-lg font-semibold">
+                            <i class="fab fa-twitter mr-2"></i>Share on Twitter
+                        </button>
+                        <button onclick="shareOnSocial(${listing.id}, 'linkedin')" 
+                            class="social-share-btn bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold">
+                            <i class="fab fa-linkedin mr-2"></i>Share on LinkedIn
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        function closeListingModal() {
+            document.getElementById('listingModal').classList.remove('active');
+        }
+
+        // Submit Property Inquiry
+        function submitPropertyInquiry(event, listingId) {
+            event.preventDefault();
+            const listing = listings.find(l => l.id === listingId);
+            showNotification('Inquiry sent to ' + listing.broker + ' successfully!');
+            closeListingModal();
+        }
+
+        // Lead Form Submission
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const lead = {
+                id: Date.now(),
+                name: document.getElementById('leadName').value,
+                email: document.getElementById('leadEmail').value,
+                phone: document.getElementById('leadPhone').value,
+                interest: document.getElementById('leadInterest').value,
+                date: new Date().toLocaleDateString()
+            };
+            
+            leads.push(lead);
+            saveToStorage();
+            renderLeads();
+            updateStats();
+            showNotification('Thank you! We will contact you shortly.');
+            this.reset();
+        });
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Message sent successfully! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Add Listing Form
+        document.getElementById('addListingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const imageFile = document.getElementById('listingImage').files[0];
+            let imageUrl = 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop';
+            
+            if (imageFile) {
+                imageUrl = URL.createObjectURL(imageFile);
+            }
+            
+            const listing = {
+                id: Date.now(),
+                title: document.getElementById('listingTitle').value,
+                price: document.getElementById('listingPrice').value,
+                location: document.getElementById('listingLocation').value,
+                bedrooms: document.getElementById('listingBedrooms').value,
+                bathrooms: document.getElementById('listingBathrooms').value,
+                area: document.getElementById('listingArea').value,
+                description: document.getElementById('listingDescription').value,
+                broker: document.getElementById('listingBroker').value,
+                brokerEmail: document.getElementById('listingBrokerEmail').value,
+                image: imageUrl
+            };
+            
+            listings.push(listing);
+            saveToStorage();
+            renderListings();
+            updateStats();
+            showNotification('Listing added successfully!');
+            this.reset();
+            document.getElementById('imagePreview').innerHTML = '';
+        });
+
+        // Image Preview
+        document.getElementById('listingImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = 
+                        `<img src="${e.target.result}" class="property-image-preview mt-2">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Video Upload
+        document.getElementById('videoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                document.getElementById('uploadedVideo').src = url;
+                document.getElementById('videoPreview').classList.remove('hidden');
+            }
+        });
+
+        // Gallery Upload
+        document.getElementById('galleryUpload').addEventListener('change', function(e) {
+            const preview = document.getElementById('galleryPreview');
+            preview.innerHTML = '';
+            
+            Array.from(e.target.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'relative group';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-24 object-cover rounded-lg">
+                        <button class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 hidden group-hover:block">
+                            <i class="fas fa-times text-xs"></i>
+                        </button>
+                    `;
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Render Admin Listings
+        function renderAdminListings() {
+            const list = document.getElementById('adminListingsList');
+            list.innerHTML = listings.map(listing => `
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center space-x-4">
+                        <img src="${listing.image}" alt="${listing.title}" class="w-20 h-20 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-gray-900">${listing.title}</h4>
+                            <p class="text-sm text-gray-600">${listing.location}</p>
+                            <p class="text-blue-600 font-bold">${listing.price}</p>
+                        </div>
+                        <button onclick="deleteListing(${listing.id})" 
+                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Delete Listing
+        function deleteListing(id) {
+            if (confirm('Are you sure you want to delete this listing?')) {
+                listings = listings.filter(l => l.id !== id);
+                saveToStorage();
+                renderListings();
+                updateStats();
+                showNotification('Listing deleted successfully!');
+            }
+        }
+
+        // Render Leads
+        function renderLeads() {
+            const tbody = document.getElementById('leadsTableBody');
+            tbody.innerHTML = leads.map(lead => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-6 py-4">${lead.name}</td>
+                    <td class="px-6 py-4">${lead.email}</td>
+                    <td class="px-6 py-4">${lead.phone || 'N/A'}</td>
+                    <td class="px-6 py-4">${lead.interest || 'General'}</td>
+                    <td class="px-6 py-4">${lead.date}</td>
+                    <td class="px-6 py-4">
+                        <button onclick="deleteLead(${lead.id})" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Delete Lead
+        function deleteLead(id) {
+            if (confirm('Are you sure you want to delete this lead?')) {
+                leads = leads.filter(l => l.id !== id);
+                renderLeads();
+                updateStats();
+                showNotification('Lead deleted successfully!');
+            }
+        }
+
+        // Export Leads
+        function exportLeads(format) {
+            if (leads.length === 0) {
+                showNotification('No leads to export!', 'error');
+                return;
+            }
+            
+            if (format === 'csv') {
+                let csv = 'Name,Email,Phone,Interest,Date\n';
+                leads.forEach(lead => {
+                    csv += `${lead.name},${lead.email},${lead.phone || ''},${lead.interest || ''},${lead.date}\n`;
+                });
+                
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'leads_export.csv';
+                a.click();
+                showNotification('Leads exported to CSV successfully!');
+            } else if (format === 'pdf') {
+                showNotification('PDF export functionality would integrate with a PDF library in production!');
+            }
+        }
+
+        // Render Social Listings
+        function renderSocialListings() {
+            const container = document.getElementById('socialListings');
+            container.innerHTML = listings.map(listing => `
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <img src="${listing.image}" alt="${listing.title}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h5 class="font-bold text-sm">${listing.title}</h5>
+                            <p class="text-xs text-gray-600">${listing.price}</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="shareOnSocial(${listing.id}, 'facebook')" 
+                            class="flex-1 bg-blue-600 text-white px-3 py-2 rounded text-sm hover:bg-blue-700">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button onclick="shareOnSocial(${listing.id}, 'instagram')" 
+                            class="flex-1 bg-pink-600 text-white px-3 py-2 rounded text-sm hover:bg-pink-700">
+                            <i class="fab fa-instagram"></i>
+                        </button>
+                        <button onclick="shareOnSocial(${listing.id}, 'linkedin')" 
+                            class="flex-1 bg-blue-800 text-white px-3 py-2 rounded text-sm hover:bg-blue-900">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button onclick="shareOnSocial(${listing.id}, 'twitter')" 
+                            class="flex-1 bg-blue-400 text-white px-3 py-2 rounded text-sm hover:bg-blue-500">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Share on Social Media
+        function shareOnSocial(id, platform) {
+            const listing = listings.find(l => l.id === id);
+            if (!listing) return;
+            
+            const shareText = `Check out this amazing property: ${listing.title} - ${listing.price}`;
+            const shareUrl = window.location.href;
+            
+            let url = '';
+            switch(platform) {
+                case 'facebook':
+                    url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                    break;
+                case 'twitter':
+                    url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+                    break;
+                case 'linkedin':
+                    url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+                    break;
+                case 'instagram':
+                    showNotification('Instagram sharing opens in the app. Copy link to share!');
+                    navigator.clipboard.writeText(shareUrl);
+                    return;
+                default:
+                    showNotification('Social media sharing activated!');
+                    return;
+            }
+            
+            window.open(url, '_blank', 'width=600,height=400');
+            showNotification(`Sharing on ${platform}!`);
+        }
+
+        // Process Video
+        function processVideo() {
+            showNotification('Video processing started! This would integrate with video editing APIs in production.');
+        }
+
+        // Embed YouTube
+        function embedYouTube() {
+            const url = document.getElementById('youtubeUrl').value;
+            if (url) {
+                showNotification('YouTube video embedded successfully!');
+                document.getElementById('youtubeUrl').value = '';
+            }
+        }
+
+        // Generate Marketing Copy
+        function generateMarketingCopy() {
+            const textarea = document.getElementById('marketingCopy');
+            const sampleCopy = `🏡 EXCLUSIVE LISTING ALERT! 🏡
+
+Discover your dream home in the heart of Johannesburg! This stunning property features:
+
+✨ Modern architecture with luxury finishes
+✨ Spacious living areas perfect for entertaining
+✨ Prime location with easy access to amenities
+✨ Investment opportunity in a growing neighborhood
+
+Don't miss out on this incredible opportunity!
+
+📞 Contact us today: +27 69 640 0789
+📧 Email: shaunmichael@galaxyhit.com
+
+#SkyHausLuxor #JohannesburgRealEstate #LuxuryHomes #PropertyForSale #DreamHome`;
+            
+            textarea.value = sampleCopy;
+            showNotification('AI Marketing copy generated!');
+        }
+
+        // Schedule Campaign
+        function scheduleCampaign() {
+            const date = document.getElementById('campaignDate').value;
+            const time = document.getElementById('campaignTime').value;
+            
+            if (date && time) {
+                showNotification(`Campaign scheduled for ${date} at ${time}!`);
+                document.getElementById('campaignDate').value = '';
+                document.getElementById('campaignTime').value = '';
+            } else {
+                showNotification('Please select date and time!', 'error');
+            }
+        }
+
+        // Download Analytics
+        function downloadAnalytics() {
+            showNotification('Analytics report downloaded successfully!');
+        }
+
+        // Update Stats
+        function updateStats() {
+            document.getElementById('totalListings').textContent = listings.length;
+            document.getElementById('totalLeads').textContent = leads.length;
+        }
+
+        // Toggle Admin Panel
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('active');
+        }
+
+        // Switch Admin Tab
+        function switchAdminTab(tab) {
+            // Hide all tabs
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.add('hidden'));
+            
+            // Remove active state from all tab buttons
+            document.querySelectorAll('[id^="tab"]').forEach(btn => {
+                btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                btn.classList.add('text-gray-600');
+            });
+            
+            // Show selected tab
+            document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('hidden');
+            
+            // Add active state to selected tab button
+            const activeBtn = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+            activeBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+            activeBtn.classList.remove('text-gray-600');
+            
+            currentAdminTab = tab;
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // Show Notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = type === 'success' ? '#10b981' : '#ef4444';
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const adminPanel = document.getElementById('adminPanel');
+            const listingModal = document.getElementById('listingModal');
+            
+            if (event.target === adminPanel) {
+                adminPanel.classList.remove('active');
+            }
+            if (event.target === listingModal) {
+                listingModal.classList.remove('active');
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadFromStorage();
+            renderListings();
+            renderLeads();
+            updateStats();
+        });
+    </script>
+</body>
+</html>
